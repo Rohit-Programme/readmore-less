@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read More and Read Less button</title>
+  <style type="text/css">
+    * {
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'roboto', sans-serif;
+      background-color: rgb(78, 220, 173);
+      display: flex;
+      justify-content: center;
+      padding-top: 150px;
+    }
+
+    .card {
+      background-color: #fff;
+      width: 400px;
+      padding: 22px 30px;
+      border-radius: 5px;
+      line-height: 1.8;
+    }
+
+    .content {
+      display: none;
+    }
+
+    .read-more,
+    .read-less {
+      display: inline-block;
+      cursor: pointer;
+      color: #fff;
+      background-color: aqua;
+      padding: 3px 13px;
+      border-radius: 3px;
+      margin-top: 12px;
+    }
+
+    .dots-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      margin: 5px;
+      animation: dot-animation 2s infinite;
+    }
+
+    .down-arrow {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid;
+      animation: arrow-animation 2s infinite;
+    }
+
+    @keyframes dot-animation {
+      0%, 100% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes arrow-animation {
+      0%, 100% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dot-1 {
+      border-top-color: rgb(255, 0, 0);
+    }
+
+    .dot-2 {
+      border-top-color: rgb(0, 255, 0);
+    }
+
+    .dot-3 {
+      border-top-color: rgb(0, 0, 255);
+    }
+
+    .dot-4 {
+      border-top-color: rgb(255, 255, 0);
+    }
+
+    .dot-5 {
+      border-top-color: rgb(255, 0, 255);
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+<h2>Hello World!</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+Libero, magnam! Alias reprehenderit eum asperiores hic tenetur nemo repellendus,
+expedita architecto</p>
+<div class="dots-container">
+  <span class="dot dot-1 down-arrow"></span>
+  <span class="dot dot-2 down-arrow"></span>
+  <span class="dot dot-3 down-arrow"></span>
+  <span class="dot dot-4 down-arrow"></span>
+  <span class="dot dot-5 down-arrow"></span>
+</div>
+<div class="content">
+<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+Velit, id a quisquam maiores obcaecati 
+ad perferendis libero excepturi nisi sit nam pariatur enim! 
+Fuga aspernatur veniam dolores dolorum distinctio, 
+ipsa perspiciatis atque reiciendis earum dicta culpa architecto assumenda ducimus vitae!
+</p>
+<label class="read-less">Read Less</label>
+</div>
+<label class="read-more">Read More</label>
+</div>
+
+<script>
+  const readMoreBtn = document.querySelector('.read-more');
+  const readLessBtn = document.querySelector('.read-less');
+  const content = document.querySelector('.content');
+  const dotsContainer = document.querySelector('.dots-container');
+
+  readMoreBtn.addEventListener('click', function() {
+    content.style.display = 'block';
+    dotsContainer.style.display = 'none';
+    readMoreBtn.style.display = 'none';
+    readLessBtn.style.display = 'inline-block';
+  });
+
+  readLessBtn.addEventListener('click', function() {
+    content.style.display = 'none';
+    dotsContainer.style.display = 'flex';
+    readMoreBtn.style.display = 'inline-block';
+    readLessBtn.style.display = 'none';
+  });
+
+  function animateDots() {
+    const dots = document.querySelectorAll('.dot');
+    let counter = 1;
+    dots.forEach((dot) => {
+      dot.classList.remove(`dot-${counter}`);
+      counter++;
+      if (counter > 5) {
+        counter = 1;
+      }
+      dot.classList.add(`dot-${counter}`);
+    });
+  }
+
+  window.addEventListener('scroll', animateDots);
+</script>
+
+</body>
+</html>
